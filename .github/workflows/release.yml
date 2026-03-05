@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: write       # create releases and push the version tag
+  issues: write         # comment on issues resolved by the release
+  pull-requests: write  # comment on PRs included in the release
+
+jobs:
+  release:
+    name: Semantic Release
+    runs-on: ubuntu-latest
+    # Only run when CI passed — not on failure or cancellation
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history required so semantic-release can analyse all commits
+          fetch-depth: 0
+          # Do not use the default GITHUB_TOKEN credential so semantic-release
+          # can push the version commit and trigger downstream workflows
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # uv is required by build-deb.sh to export pinned requirements
+      - uses: astral-sh/setup-uv@v4
+        with:
+          enable-caching: true
+          cache-dependency-glob: backend/uv.lock
+
+      # dpkg-deb is pre-installed on ubuntu-latest; ffmpeg is not needed at
+      # build time, only at runtime on the target machine.
+
+      - name: Install semantic-release and plugins
+        run: |
+          npm install --global \
+            semantic-release \
+            @semantic-release/changelog \
+            @semantic-release/git \
+            @semantic-release/exec \
+            @semantic-release/github
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release

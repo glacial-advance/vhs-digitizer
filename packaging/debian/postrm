@@ -1,0 +1,39 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    purge)
+        # Remove systemd unit file
+        rm -f /lib/systemd/system/vhs-digitizer.service
+        systemctl daemon-reload || true
+
+        # Remove application files (venv is under APP_DIR, not DATA_DIR)
+        rm -rf /usr/lib/vhs-digitizer
+
+        # Remove data directory including database and recordings
+        # Only on purge — remove leaves recordings intact
+        rm -rf /var/lib/vhs-digitizer
+
+        # Remove system user
+        if id vhs-digitizer >/dev/null 2>&1; then
+            deluser --system vhs-digitizer || true
+        fi
+        ;;
+
+    remove)
+        # Remove systemd unit but leave data directory intact
+        rm -f /lib/systemd/system/vhs-digitizer.service
+        systemctl daemon-reload || true
+        rm -rf /usr/lib/vhs-digitizer
+        ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        ;;
+
+    *)
+        echo "postrm called with unknown argument '$1'" >&2
+        exit 1
+        ;;
+esac
+
+exit 0

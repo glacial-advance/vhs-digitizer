@@ -1,0 +1,11 @@
+Package: vhs-digitizer
+Version: 1.0.0
+Architecture: amd64
+Maintainer: VHS Digitizer <vhs-digitizer@localhost>
+Depends: python3 (>= 3.11), python3-venv, python3-pip, ffmpeg, adduser
+Recommends: obs-studio
+Description: VHS tape digitization management application
+ A locally-hosted web application for managing and tracking the conversion
+ of physical VHS tape collections into digital video files. Provides a web
+ interface accessible from any device on the local network, with OBS Studio
+ integration for automated recording control.

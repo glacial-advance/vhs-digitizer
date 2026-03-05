@@ -1,0 +1,24 @@
+[Unit]
+Description=VHS Digitizer
+Documentation=https://github.com/your-org/vhs-digitizer
+After=network.target
+
+[Service]
+Type=simple
+User=vhs-digitizer
+Group=vhs-digitizer
+WorkingDirectory=/usr/lib/vhs-digitizer/backend
+ExecStart=/usr/lib/vhs-digitizer/venv/bin/python main.py
+Environment=VHS_DB_PATH=/var/lib/vhs-digitizer/vhs.db
+Environment=VHS_OUTPUT_DIR=/var/lib/vhs-digitizer/recordings
+Restart=on-failure
+RestartSec=5
+
+# Harden the service
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/vhs-digitizer
+
+[Install]
+WantedBy=multi-user.target
