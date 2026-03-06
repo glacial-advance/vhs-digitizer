@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/glacial-advance/vhs-digitizer/compare/v1.0.0...v1.0.1) (2026-03-06)
+
+
+### Bug Fixes
+
+* read DB path from VHS_DB_PATH environment variable ([2bce630](https://github.com/glacial-advance/vhs-digitizer/commit/2bce6301da9fe30711918bbae7dbcff9382fbcaf))
+
 # 1.0.0 (2026-03-06)
 
 
