@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/glacial-advance/vhs-digitizer/compare/v1.0.1...v1.0.2) (2026-03-06)
+
+
+### Bug Fixes
+
+* create frontend dir before copying dist in build-deb.sh ([9085820](https://github.com/glacial-advance/vhs-digitizer/commit/908582076483d9ff233f3bf56c256ec36b350394))
+
 ## [1.0.1](https://github.com/glacial-advance/vhs-digitizer/compare/v1.0.0...v1.0.1) (2026-03-06)
 
 
