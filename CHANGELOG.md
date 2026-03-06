@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/glacial-advance/vhs-digitizer/compare/v1.0.2...v1.0.3) (2026-03-06)
+
+
+### Bug Fixes
+
+* guard against deleted tape in recording_stop ([9c93cc0](https://github.com/glacial-advance/vhs-digitizer/commit/9c93cc01f75f0724c18bc11733c3dae01ce22f45))
+
 ## [1.0.2](https://github.com/glacial-advance/vhs-digitizer/compare/v1.0.1...v1.0.2) (2026-03-06)
 
 
