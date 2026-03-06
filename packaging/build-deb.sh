@@ -44,11 +44,7 @@ uv export --no-hashes --no-dev -o "$APP_DIR/requirements.txt"
 echo "==> Copying backend..."
 cp "$REPO_ROOT/backend/main.py"     "$APP_DIR/backend/"
 cp "$REPO_ROOT/backend/obs.py"      "$APP_DIR/backend/"
-cp "$REPO_ROOT/backend/db.py"       "$APP_DIR/backend/"
-cp "$REPO_ROOT/backend/models.py"   "$APP_DIR/backend/"
-cp "$REPO_ROOT/backend/recording.py" "$APP_DIR/backend/"
-cp "$REPO_ROOT/backend/chapters.py" "$APP_DIR/backend/"
-cp "$REPO_ROOT/backend/jobs.py"     "$APP_DIR/backend/"
+cp "$REPO_ROOT/backend/database.py" "$APP_DIR/backend/"
 
 # ── 4. Copy pre-built frontend ────────────────────────────────────────────────
 echo "==> Copying frontend dist..."
