@@ -316,6 +316,7 @@ async def recording_stop() -> dict:
 
     tape_id = active_recording["tape_id"]
     tape = db.get_tape(tape_id)
+    tape_label = tape["label"] if tape else f"tape_{tape_id}"
 
     await obs.stop_recording()
     await asyncio.sleep(1.5)
@@ -323,16 +324,17 @@ async def recording_stop() -> dict:
     settings = db.get_settings()
     output_dir = settings.get("output_dir", str(Path.home() / "vhs-recordings"))
 
-    output_file = _find_and_rename_recording(output_dir, tape["label"])  # type: ignore[index]
+    output_file = _find_and_rename_recording(output_dir, tape_label)
     duration_ms = _probe_duration(output_file) if output_file else None
 
-    db.update_tape(
-        tape_id,
-        status="done",
-        recorded_at=datetime.now(UTC).isoformat(),
-        output_file=output_file,
-        duration_ms=duration_ms,
-    )
+    if tape:
+        db.update_tape(
+            tape_id,
+            status="done",
+            recorded_at=datetime.now(UTC).isoformat(),
+            output_file=output_file,
+            duration_ms=duration_ms,
+        )
     active_recording = None
     await _broadcast("recording_stopped", {"tape_id": tape_id, "output_file": output_file})
     return {"ok": True, "output_file": output_file}
