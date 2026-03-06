@@ -1,10 +1,11 @@
+import os
 import sqlite3
 from collections.abc import Generator
 from contextlib import contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent / "vhs.db"
+DB_PATH = Path(os.environ.get("VHS_DB_PATH", str(Path(__file__).parent / "vhs.db")))
 
 DEFAULT_SETTINGS = {
     "obs_host": "localhost",
