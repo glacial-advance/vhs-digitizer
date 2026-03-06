@@ -318,8 +318,11 @@ async def recording_stop() -> dict:
     tape = db.get_tape(tape_id)
     tape_label = tape["label"] if tape else f"tape_{tape_id}"
 
-    await obs.stop_recording()
-    await asyncio.sleep(1.5)
+    try:
+        await obs.stop_recording()
+        await asyncio.sleep(1.5)
+    except Exception as exc:
+        logger.warning("OBS stop_recording failed (recording may have already stopped): %s", exc)
 
     settings = db.get_settings()
     output_dir = settings.get("output_dir", str(Path.home() / "vhs-recordings"))
