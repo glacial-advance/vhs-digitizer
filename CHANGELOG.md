@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/glacial-advance/vhs-digitizer/compare/v1.0.3...v1.0.4) (2026-03-06)
+
+
+### Bug Fixes
+
+* gracefully handle OBS errors in recording_stop ([39547d9](https://github.com/glacial-advance/vhs-digitizer/commit/39547d9e5161da52e98fb5f4dade3dade73fbbad))
+
 ## [1.0.3](https://github.com/glacial-advance/vhs-digitizer/compare/v1.0.2...v1.0.3) (2026-03-06)
 
 
