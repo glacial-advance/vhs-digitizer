@@ -48,6 +48,7 @@ cp "$REPO_ROOT/backend/database.py" "$APP_DIR/backend/"
 
 # ── 4. Copy pre-built frontend ────────────────────────────────────────────────
 echo "==> Copying frontend dist..."
+mkdir -p "$APP_DIR/frontend"
 cp -r "$REPO_ROOT/frontend/dist" "$APP_DIR/frontend/"
 
 # ── 5. Copy systemd unit file ─────────────────────────────────────────────────
